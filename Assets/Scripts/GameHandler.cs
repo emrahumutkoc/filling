@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public CameraFollow cameraFollow;
+    [SerializeField] private CameraFollow cameraFollow;
     public Transform playerTransform;
     public Transform obstacle1;
     public Transform obstacle2;
     public Transform obstacle3;
-    private float zoom;
+    private float zoom = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
         cameraFollow.Setup(() => playerTransform.position, () => zoom);
+        // cameraFollow.SetCameraFollowPosition(new Vector3(100f, 100f));
+        HandleZoom();
+    }
 
+    private void HandleZoom() {
+
+        float zoomChangeAmount = 2f;
+        if (Input.mouseScrollDelta.y > 0) {
+            zoom -= zoomChangeAmount * Time.deltaTime;
+        }
+        if (Input.mouseScrollDelta.y < 0) {
+            zoom += zoomChangeAmount * Time.deltaTime;
+        }
     }
 
     // Update is called once per frame
@@ -36,23 +48,5 @@ public class GameHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C)) {
             cameraFollow.SetGetCameraFollowPositionFunc(() => obstacle3.position);
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            ZoomIn();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            ZoomOut();
-        }
     }
-
-    private void ZoomIn() {
-        zoom -= 5f;
-        if (zoom < 40f) zoom = 5f;
-    }
-    private void ZoomOut() {
-        zoom += 5f;
-        if (zoom > 30f) zoom = 30f;
-    }
-
-
 }

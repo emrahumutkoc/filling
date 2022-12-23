@@ -7,6 +7,8 @@ public class CameraFollow : MonoBehaviour {
     private Camera myCamera;
     private Func<Vector3> GetCameraFollowPositionFunc;
     private Func<float> GetCameraZoomFunc;
+
+
     public void Setup(Func<Vector3> GetCameraFollowPositionFunc, Func<float> GetCameraZoomFunc) {
         this.GetCameraFollowPositionFunc = GetCameraFollowPositionFunc;
         this.GetCameraZoomFunc = GetCameraZoomFunc;
@@ -16,8 +18,20 @@ public class CameraFollow : MonoBehaviour {
         myCamera = transform.GetComponent<Camera>();
     }
 
+    public void SetCameraFollowPosition(Vector3 cameraFollowPosition) {
+        SetGetCameraFollowPositionFunc(() => cameraFollowPosition);
+    }
+
     public void SetGetCameraFollowPositionFunc(Func<Vector3> GetCameraFollowPositionFunc) {
         this.GetCameraFollowPositionFunc = GetCameraFollowPositionFunc;
+    }
+
+    public void SetCameraZoom(float cameraZoom) {
+        SetGetCameraZoomFunc(() => cameraZoom);
+    }
+
+    public void SetGetCameraZoomFunc(Func<float> GetCameraZoomFunc) {
+        this.GetCameraZoomFunc = GetCameraZoomFunc;
     }
 
     private void Update() {
