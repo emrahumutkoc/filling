@@ -13,11 +13,14 @@ public class GameHandler : MonoBehaviour
     private float zoom = 5f;
 
     private GridTEST<CellObject> grid;
-
+    private GridSpriteSystem<GridCellSprite> spriteGrid;
+    private TilemapGrid tilemap;
     // Start is called before the first frame update
     void Start()
     {
-        grid = new GridTEST<CellObject>(20, 20, 1f, Vector3.zero, (GridTEST<CellObject> g, int x, int y) => new CellObject(g, x, y));
+        //grid = new GridTEST<CellObject>(40, 40, 1f, Vector3.zero, (GridTEST<CellObject> g, int x, int y) => new CellObject(g, x, y));
+        //spriteGrid = new GridSpriteSystem<GridCellSprite>(40, 40, 1f, Vector3.zero, (GridSpriteSystem<GridCellSprite> g, int x, int y) => new GridCellSprite(g, x, y));
+        tilemap = new TilemapGrid(40, 40, 3f, Vector3.zero);
         cameraFollow.Setup(() => playerTransform.position, () => zoom);
         // cameraFollow.SetCameraFollowPosition(new Vector3(100f, 100f));
        
@@ -28,12 +31,21 @@ public class GameHandler : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) {
             Vector3 position = Utils.GetMouseWorldPosition();
-            //grid.SetValue(position, true);
-            //grid.AddValue(position, 100, 2, 25);
-            CellObject cellObject = grid.GetGridObject(position);
-            if (cellObject != null) {   
-                cellObject.AddValue(5);
-            }
+
+            //CellObject cellObject = grid.GetGridObject(position);
+            //if (cellObject != null) {   
+            //    cellObject.AddValue(5);
+            //}
+
+            //GridCellSprite cellObject = spriteGrid.GetGridObject(position);
+            //if (cellObject != null) {
+            //    cellObject.ChangeCellSprite();
+            //}
+            tilemap.SetTilemapSprite(position, TilemapGrid.TilemapObject.TileMapSprite.Ground);
+
+            //if (cellObject != null) {
+            //    cellObject.ChangeCellSprite();
+            //}
         }
     }
 
@@ -90,3 +102,24 @@ public class CellObject {
         return value.ToString();
     }
 }
+
+//public class GridCellSprite: MonoBehaviour {
+//    private GridSpriteSystem<GridCellSprite> grid;
+//    GameObject cellObject;
+//    SpriteRenderer spriteRenderer;
+//    private int x, y;
+
+//    public GridCellSprite(GridSpriteSystem<GridCellSprite> grid, int x, int y) {
+//        this.grid = grid;
+//        this.x = x;
+//        this.y = y;
+//    }
+
+//    public void ChangeCellSprite() {
+//        cellObject.GetComponent<SpriteRenderer>().color = Color.green;
+//    }
+
+//    public override string ToString() {
+//        return "0";
+//    }
+//}
