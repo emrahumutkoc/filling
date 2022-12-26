@@ -17,12 +17,18 @@ public class TilemapGrid {
         }
     }
 
+    public void SetTilemapVisual(TilemapVisual tilemapVisual) {
+        tilemapVisual.SetGrid(grid);
+    }
+
 
     // Define object that will be in grid cell
     public class TilemapObject {
         public enum TileMapSprite {
             None,
-            Ground
+            Ground,
+            Path,
+            Dirt
         }
 
         private GridSpriteSystem<TilemapObject> grid;
@@ -38,6 +44,10 @@ public class TilemapGrid {
         public void SetTilemapSprite(TileMapSprite tilemapSprite) {
             this.tilemapSprite = tilemapSprite;
             grid.TriggerGridObjectChanged(x, y);
+        }
+
+        public TileMapSprite GetTileMapSprite() {
+            return tilemapSprite;
         }
 
         public override string ToString() {

@@ -6,6 +6,7 @@ using MRH.Utils;
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] private CameraFollow cameraFollow;
+    [SerializeField] private TilemapVisual tilemapVisual;
     public Transform playerTransform;
     public Transform obstacle1;
     public Transform obstacle2;
@@ -15,15 +16,18 @@ public class GameHandler : MonoBehaviour
     private GridTEST<CellObject> grid;
     private GridSpriteSystem<GridCellSprite> spriteGrid;
     private TilemapGrid tilemap;
+    private TilemapGrid.TilemapObject.TileMapSprite tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Ground;
+
     // Start is called before the first frame update
     void Start()
     {
         //grid = new GridTEST<CellObject>(40, 40, 1f, Vector3.zero, (GridTEST<CellObject> g, int x, int y) => new CellObject(g, x, y));
         //spriteGrid = new GridSpriteSystem<GridCellSprite>(40, 40, 1f, Vector3.zero, (GridSpriteSystem<GridCellSprite> g, int x, int y) => new GridCellSprite(g, x, y));
-        tilemap = new TilemapGrid(40, 40, 3f, Vector3.zero);
+        tilemap = new TilemapGrid(40, 40, 10f, Vector3.zero);
         cameraFollow.Setup(() => playerTransform.position, () => zoom);
+        tilemap.SetTilemapVisual(tilemapVisual);
         // cameraFollow.SetCameraFollowPosition(new Vector3(100f, 100f));
-       
+
     }
     void Update() {
         HandleZoom();
@@ -36,16 +40,33 @@ public class GameHandler : MonoBehaviour
             //if (cellObject != null) {   
             //    cellObject.AddValue(5);
             //}
-
+             
             //GridCellSprite cellObject = spriteGrid.GetGridObject(position);
             //if (cellObject != null) {
             //    cellObject.ChangeCellSprite();
             //}
-            tilemap.SetTilemapSprite(position, TilemapGrid.TilemapObject.TileMapSprite.Ground);
+            tilemap.SetTilemapSprite(position, tilemapSprite);
 
             //if (cellObject != null) {
             //    cellObject.ChangeCellSprite();
             //}
+        }
+
+        
+        if (Input.GetKeyDown(KeyCode.G)) {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.None;
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Ground;
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Path;
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Dirt;
         }
     }
 
