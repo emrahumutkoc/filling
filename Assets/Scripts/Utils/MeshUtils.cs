@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace MRH.MeshUtils {
-
 	public static class MeshUtils {
 
 		private static readonly Vector3 Vector3zero = Vector3.zero;
@@ -150,3 +149,4 @@ namespace MRH.MeshUtils {
 		}
 	}
 }
+
