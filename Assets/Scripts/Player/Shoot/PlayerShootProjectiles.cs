@@ -23,7 +23,7 @@ public class PlayerShootProjectiles : MonoBehaviour {
         Transform bulletTransform = Instantiate(pfBulletPhysics, e.gunEndPointPosition, Quaternion.identity);
         Vector3 shootDir = (e.shootPosition - e.gunEndPointPosition).normalized;
         bulletTransform.GetComponent<BulletPhysics>().Setup(shootDir);
-       
+
 
         // METHOD 3;
         //Vector3 shootDir = (e.shootPosition - e.gunEndPointPosition).normalized;

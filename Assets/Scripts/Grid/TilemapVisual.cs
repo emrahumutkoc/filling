@@ -44,7 +44,7 @@ public class TilemapVisual : MonoBehaviour {
     public void SetGrid(GridSpriteSystem<TilemapGrid.TilemapObject> grid) {
         this.grid = grid;
         UpdateHeatMapVisual();
-
+        //SetCellCollider();
         grid.OnGridValueChanged += Grid_OnGridValueChanged;
     }
 
@@ -60,9 +60,25 @@ public class TilemapVisual : MonoBehaviour {
         }
     }
 
+    public void SetCellCollider() {
+        if (grid != null) {
+            for (int x = 0; x < grid.GetWidth(); x++) {
+                for (int y = 0; y < grid.GetHeight(); y++) {
+
+                    Vector3 quadSize = new Vector3(1, 1) * grid.GetCellSize();
+                    Debug.Log("quads" + quadSize);
+                    Vector3 colliderPoints = grid.GetWorldPosition(x, y) + new Vector3(grid.GetCellSize(), grid.GetCellSize()) * .5f;
+                    BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
+                    boxCollider.offset = colliderPoints;
+                    Debug.Log(x + " " + y + " " + grid.GetCellSize());
+                    boxCollider.size = new Vector2(grid.GetCellSize() * .9f,grid.GetCellSize() * .9f);
+                }
+            }
+        }
+    }
+
     private void UpdateHeatMapVisual() {
         MeshUtils.CreateEmptyMeshArrays(grid.GetWidth() * grid.GetHeight(), out Vector3[] vertices, out Vector2[] uv, out int[] triangles);
-
         for (int x = 0; x < grid.GetWidth(); x++) {
             for (int y = 0; y < grid.GetHeight(); y++) {
                 int index = x * grid.GetHeight() + y;
@@ -70,7 +86,7 @@ public class TilemapVisual : MonoBehaviour {
 
                 TilemapGrid.TilemapObject gridObject = grid.GetGridObject(x, y);
                 TilemapGrid.TilemapObject.TileMapSprite tileMapSprite = gridObject.GetTileMapSprite();
-
+              
                 Vector2 gridValueUV00, gridValueUV11;
                 if (tileMapSprite == TilemapGrid.TilemapObject.TileMapSprite.None) {
                     gridValueUV00 = Vector2.zero;
@@ -82,7 +98,7 @@ public class TilemapVisual : MonoBehaviour {
                     gridValueUV00 = uvCoords.uv00;
                     gridValueUV11 = uvCoords.uv11;
                 }
-                 
+                
                 MeshUtils.AddToMeshArrays(vertices, uv, triangles, index, grid.GetWorldPosition(x, y) + quadSize * .5f, 0f, quadSize, gridValueUV00, gridValueUV11);
             }
         }

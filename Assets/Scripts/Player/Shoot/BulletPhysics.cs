@@ -16,10 +16,16 @@ public class BulletPhysics : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collider) {
         Target target = collider.GetComponent<Target>();
+        TilemapVisual tileMapVisual = collider.GetComponent<TilemapVisual>();
+        //Debug.Log("asd" + collider.ToString());
         if (target != null) {
             // Hit
             target.Damage();
             Destroy(gameObject);
+        }
+
+        if (tileMapVisual != null) {
+            Debug.Log("mrh");
         }
     }
 }

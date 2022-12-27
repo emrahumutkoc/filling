@@ -34,6 +34,7 @@ public class TilemapGrid {
         private GridSpriteSystem<TilemapObject> grid;
         private int x, y;
         private TileMapSprite tilemapSprite;
+        private BoxCollider2D boxCollider2D;
        
         public TilemapObject(GridSpriteSystem<TilemapObject> grid, int x, int y) {
             this.grid = grid;
@@ -43,6 +44,11 @@ public class TilemapGrid {
 
         public void SetTilemapSprite(TileMapSprite tilemapSprite) {
             this.tilemapSprite = tilemapSprite;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+
+        public void SetBoxCollider(BoxCollider2D collider) {
+            boxCollider2D = collider;
             grid.TriggerGridObjectChanged(x, y);
         }
 

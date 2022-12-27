@@ -23,7 +23,7 @@ public class GameHandler : MonoBehaviour
     {
         //grid = new GridTEST<CellObject>(40, 40, 1f, Vector3.zero, (GridTEST<CellObject> g, int x, int y) => new CellObject(g, x, y));
         //spriteGrid = new GridSpriteSystem<GridCellSprite>(40, 40, 1f, Vector3.zero, (GridSpriteSystem<GridCellSprite> g, int x, int y) => new GridCellSprite(g, x, y));
-        tilemap = new TilemapGrid(40, 40, 10f, Vector3.zero);
+        tilemap = new TilemapGrid(40, 40, 5f, Vector3.zero);
         cameraFollow.Setup(() => playerTransform.position, () => zoom);
         tilemap.SetTilemapVisual(tilemapVisual);
         // cameraFollow.SetCameraFollowPosition(new Vector3(100f, 100f));
@@ -94,7 +94,6 @@ public class GameHandler : MonoBehaviour
     private void HandleZoom() {
         float zoomChangeAmount = 250f;
         if (Input.mouseScrollDelta.y > 0) {
-            Debug.Log(Input.mouseScrollDelta.y);
             zoom -= zoomChangeAmount * Time.deltaTime;
         }
         if (Input.mouseScrollDelta.y < 0) {
