@@ -4,14 +4,13 @@ using UnityEngine;
 using MRH.Utils;
 
 public class BulletPhysics : MonoBehaviour {
-    public void Setup(Vector3 shootDir) {
+    public void Setup(Vector3 shootDir, float bulletMoveSpeed = 10f) {
         Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
-        float moveSpeed = 20f;
-        rigidbody2D.AddForce(shootDir * moveSpeed, ForceMode2D.Impulse);
+        rigidbody2D.AddForce(shootDir * bulletMoveSpeed, ForceMode2D.Impulse);
 
 
         transform.eulerAngles = new Vector3(0, 0, Utils.GetAngleFromVectorFloat(shootDir));
-        Destroy(gameObject, 2f);
+        //Destroy(gameObject, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
@@ -27,5 +26,19 @@ public class BulletPhysics : MonoBehaviour {
         if (tileMapVisual != null) {
             Debug.Log("mrh");
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("biþiler");
+    }
+
+    public void DestroyBullet() {
+        //Destroy(gameObject);
+
+        // to stop bullet;
+        Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
+
+        rigidbody2D.velocity = Vector2.zero;
+        rigidbody2D.angularVelocity = 0f;
     }
 }

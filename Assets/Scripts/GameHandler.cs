@@ -31,8 +31,8 @@ public class GameHandler : MonoBehaviour
     }
     void Update() {
         HandleZoom();
-        HandleCameraChange();
-
+        //HandleCameraChange();
+        //HandleChangeCellSprite();
         if (Input.GetMouseButtonDown(0)) {
             Vector3 position = Utils.GetMouseWorldPosition();
 
@@ -50,23 +50,6 @@ public class GameHandler : MonoBehaviour
             //if (cellObject != null) {
             //    cellObject.ChangeCellSprite();
             //}
-        }
-
-        
-        if (Input.GetKeyDown(KeyCode.G)) {
-            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.None;
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Ground;
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Path;
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Dirt;
         }
     }
 
@@ -91,6 +74,20 @@ public class GameHandler : MonoBehaviour
 
     }
 
+    private void HandleChangeCellSprite() {
+        if (Input.GetKeyDown(KeyCode.G)) {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.None;
+        }
+        if (Input.GetKeyDown(KeyCode.Y)) {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Ground;
+        }
+        if (Input.GetKeyDown(KeyCode.U)) {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Path;
+        }
+        if (Input.GetKeyDown(KeyCode.H)) {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Dirt;
+        }
+    }
     private void HandleZoom() {
         float zoomChangeAmount = 250f;
         if (Input.mouseScrollDelta.y > 0) {

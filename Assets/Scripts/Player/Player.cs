@@ -5,12 +5,17 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private PlayerBase playerBase;
+    private Rigidbody2D playerRigidbody2D;
+    private Vector3 moveDir;
     private Vector3 lastMoveDir;
-    [SerializeField] float speed = 3f;
+    private bool isDashButtonDown;
+    [SerializeField] float MOVE_SPEED = 10f;
     [SerializeField] float dashDistance = 3f;
+    [SerializeField] private LayerMask dashLayerMask;
 
     private void Awake() {
         playerBase = gameObject.GetComponent<PlayerBase>();
+        playerRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update() {
@@ -35,19 +40,45 @@ public class Player : MonoBehaviour
             moveX = +1f;
         }
 
-        bool isIdle = moveX == 0 && moveY == 0;
-        if (isIdle) {
-            // manage idle animation
-        } else {
-            Vector3 moveDir = new Vector3(moveX, moveY).normalized;
-            if (TryMove(moveDir, speed * Time.deltaTime)) {
-                // manage walking animation
-                // store the last direction of the charecter and use it above to make right direction of the character.
-            } else {
-                // manage idle
+        moveDir = new Vector3(moveX, moveY).normalized;
+        if (moveX != 0 || moveY != 0) {
+            lastMoveDir = moveDir;
+        }
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            isDashButtonDown = true;
+        }
+        //bool isIdle = moveX == 0 && moveY == 0;
+
+        //if (isIdle) {
+        //    // manage idle animation
+        //} else {
+
+        //    if (TryMove(moveDir, MOVE_SPEED * Time.deltaTime)) {
+        //        // manage walking animation
+        //        // store the last direction of the charecter and use it above to make right direction of the character.
+        //    } else {
+        //        // manage idle
+        //    }
+        //}
+    }
+
+    private void FixedUpdate() {
+        playerRigidbody2D.MovePosition(transform.position + moveDir * MOVE_SPEED * Time.fixedDeltaTime);
+    
+        if (isDashButtonDown) {
+            Vector2 dashPosition = transform.position + lastMoveDir * dashDistance;
+
+            RaycastHit2D raycastHit2d = Physics2D.Raycast(transform.position, lastMoveDir, dashDistance, dashLayerMask);
+            if (raycastHit2d.collider != null) {
+                dashPosition = raycastHit2d.point;
             }
+
+            //TryMove(moveDir, dashDistance);
+            playerRigidbody2D.MovePosition(dashPosition);
+            isDashButtonDown = false;   
         }
     }
+
     // make a raycast and test the distance to the wall change dash distance accordingly
 
     private bool CanMove(Vector3 direction, float distance) {
@@ -55,7 +86,7 @@ public class Player : MonoBehaviour
     }
 
     private bool TryMove(Vector3 baseMoveDir, float distance) {
-        Vector3 moveDir = baseMoveDir;
+        moveDir = baseMoveDir;
         bool canMove = CanMove(moveDir, distance);
 
         if (!canMove) {

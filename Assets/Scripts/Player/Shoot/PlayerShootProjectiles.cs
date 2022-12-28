@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerShootProjectiles : MonoBehaviour {
     [SerializeField] private Transform pfBullet;
     [SerializeField] private Transform pfBulletPhysics;
+    [SerializeField] private float bulletMoveSpeed = 16f;
 
     private void Awake() {
         GetComponent<PlayerAim>().OnShoot += PlayerShootProjectiles_OnShoot;
@@ -22,7 +23,7 @@ public class PlayerShootProjectiles : MonoBehaviour {
         // METHOD 2;
         Transform bulletTransform = Instantiate(pfBulletPhysics, e.gunEndPointPosition, Quaternion.identity);
         Vector3 shootDir = (e.shootPosition - e.gunEndPointPosition).normalized;
-        bulletTransform.GetComponent<BulletPhysics>().Setup(shootDir);
+        bulletTransform.GetComponent<BulletPhysics>().Setup(shootDir, bulletMoveSpeed);
 
 
         // METHOD 3;
