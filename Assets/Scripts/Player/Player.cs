@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private Vector3 moveDir;
     private Vector3 lastMoveDir;
     private bool isDashButtonDown;
+    private LevelSystem levelSystem;
     [SerializeField] float MOVE_SPEED = 10f;
     [SerializeField] float dashDistance = 3f;
     [SerializeField] private LayerMask dashLayerMask;
@@ -16,6 +17,8 @@ public class Player : MonoBehaviour
     private void Awake() {
         playerBase = gameObject.GetComponent<PlayerBase>();
         playerRigidbody2D = GetComponent<Rigidbody2D>();
+    
+        
     }
 
     private void Update() {
@@ -116,5 +119,16 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             TryMove(lastMoveDir, dashDistance);
         }
+    }
+
+    public void SetLevelSystem(LevelSystem levelSystem) {
+        this.levelSystem = levelSystem;
+
+        levelSystem.OnLevelChanged += LevelSystem_OnLevelChanged;
+    }
+
+    private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e) {
+        // do whenever player level ups
+        Debug.Log("player level up");
     }
 }

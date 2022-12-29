@@ -13,7 +13,7 @@ public class BuildController : MonoBehaviour
     public Transform raycastPoint;
     public LayerMask layer;
 
-    float blockDestroyTime = 0.2f;
+    //float blockDestroyTime = 0.2f;
 
 
     Vector3 direction;
