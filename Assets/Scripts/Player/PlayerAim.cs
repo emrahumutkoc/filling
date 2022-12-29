@@ -42,7 +42,7 @@ public class PlayerAim : MonoBehaviour {
     }
 
     private void HandleShooting() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButton(0)) {
             aimAnimator.SetTrigger("Shoot");
             Vector3 mousePosition = Utils.GetMouseWorldPosition();
 

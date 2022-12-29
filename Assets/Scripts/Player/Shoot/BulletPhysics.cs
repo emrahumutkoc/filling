@@ -10,7 +10,7 @@ public class BulletPhysics : MonoBehaviour {
 
 
         transform.eulerAngles = new Vector3(0, 0, Utils.GetAngleFromVectorFloat(shootDir));
-        //Destroy(gameObject, 1f);
+        Destroy(gameObject, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
@@ -29,16 +29,16 @@ public class BulletPhysics : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("biþiler");
+        Debug.Log("biï¿½iler");
     }
 
     public void DestroyBullet() {
-        //Destroy(gameObject);
+        Destroy(gameObject);
 
-        // to stop bullet;
-        Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
+        // to stop bullet;s
+        //Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
 
-        rigidbody2D.velocity = Vector2.zero;
-        rigidbody2D.angularVelocity = 0f;
+        //rigidbody2D.velocity = Vector2.zero;
+        //rigidbody2D.angularVelocity = 0f;
     }
 }

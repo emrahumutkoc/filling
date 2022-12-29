@@ -45,26 +45,44 @@ public class ColliderManager : MonoBehaviour
 
     //}
 
-    private void OnTriggerStay2D(Collider2D collider) {
+    //private void OnTriggerEnter2D(Collider2D collider) {
+    //    BulletPhysics bullet = collider.GetComponent<BulletPhysics>();
+    //    if (bullet != null) {
+    //        //collider.ClosestPoint();
+    //        //Debug.Log("mermidir bu");
+    //        //bullet.
+    //        Debug.Log("bullet.transform.position" + bullet.transform.position);
+    //        Vector2 bulletPosition;
+    //        Vector3Int test = tilemap.WorldToCell(bullet.transform.position);
+    //        //tilemap.
+    //        Debug.Log("test  " + test.ToString());
+
+    //        bulletPosition.x = Mathf.Floor(bullet.transform.position.x);
+    //        bulletPosition.y = Mathf.Floor(bullet.transform.position.y);
+
+
+    //        Vector3Int cellPosition = new Vector3Int((int)bulletPosition.x, (int)bulletPosition.y, (int)0);
+    //        Debug.Log("cellPosition  " + cellPosition.ToString());
+    //        tilemap.SetTile(test, grassTile);
+    //        //Tile.ColliderType colliderType = Tile.ColliderType.None;
+    //        //tilemap.SetColliderType(cellPosition, colliderType);
+    //        bullet.DestroyBullet();
+    //    }
+    //}
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
         BulletPhysics bullet = collider.GetComponent<BulletPhysics>();
-        if (bullet != null) {
-            //collider.ClosestPoint();
-            //Debug.Log("mermidir bu");
-            //bullet.
-            Debug.Log("bullet.transform.position" + bullet.transform.position);
-            Vector2 bulletPosition;
-       
-            bulletPosition.x = Mathf.Floor(bullet.transform.position.x);
-            bulletPosition.y = Mathf.Floor(bullet.transform.position.y);
+        if (bullet != null)
+        {
+            Vector3Int test = tilemap.WorldToCell(bullet.transform.position);
+            TileBase tileBase = tilemap.GetTile(test);
 
-
-            Vector3Int cellPosition = new Vector3Int((int)bulletPosition.x, (int)bulletPosition.y, (int)0);
-            Debug.Log("cellPosition  " + cellPosition.ToString());
-            tilemap.SetTile(cellPosition, grassTile);
-            //Tile.ColliderType colliderType = Tile.ColliderType.None;
-            //tilemap.SetColliderType(cellPosition, colliderType);
-            bullet.DestroyBullet();
+            if (tileBase != null && tileBase != grassTile)
+            {
+                tilemap.SetTile(test, grassTile);
+                bullet.DestroyBullet();
+            }
         }
     }
 }
-
