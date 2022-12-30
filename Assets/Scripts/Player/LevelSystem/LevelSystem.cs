@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelSystem 
-{
+public class LevelSystem {
     public event EventHandler OnExperienceChanged;
     public event EventHandler OnLevelChanged;
+    private static readonly int[] experiencePerLevel = new[] { 100, 120, 140, 160, 180, 200, 220, 230, 250, 300, 400 };
     private int level;
     private int experience;
     private int experienceToNextLevel;
@@ -16,16 +16,18 @@ public class LevelSystem
         experience = 0;
         experienceToNextLevel = 100;
     }
-    
+
     public void AddExperience(int amount) {
-        experience += amount;
-    
-        while (experience >= experienceToNextLevel) {
-            // enough experience to level up
-            LevelUp();
-            experience -= experienceToNextLevel;
+        if (!isMaxLevel()) {
+            experience += amount;
+
+            while (!isMaxLevel() && experience >= GetExperienceToNextLevel(level)) {
+                // enough experience to level up
+                experience -= GetExperienceToNextLevel(level);
+                LevelUp();
+            }
+            if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
         }
-        if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
     }
 
     private void LevelUp() {
@@ -39,6 +41,27 @@ public class LevelSystem
     }
 
     public float GetExperienceNormalized() {
-        return (float) experience / experienceToNextLevel; 
+        if (isMaxLevel()) {
+            return 1f;
+        } else {
+            return (float)experience / GetExperienceToNextLevel(level);
+        }
+    }
+
+    public int GetExperienceToNextLevel(int level) {
+        if (level < experiencePerLevel.Length) {
+            return experiencePerLevel[level];
+        } else {
+            // Level 
+            return 100;
+        }
+    }
+
+    public bool isMaxLevel() {
+        return isMaxLevel(level);
+    }
+
+    public bool isMaxLevel(int level) {
+        return level == experiencePerLevel.Length - 1;
     }
 }
