@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelWindow : MonoBehaviour
-{
+public class LevelWindow : MonoBehaviour {
     private Text levelText;
     private Image experienceBarImage;
     private LevelSystem levelSystem;
+
     private void Awake() {
         levelText = transform.Find("levelText").GetComponent<Text>();
         experienceBarImage = transform.Find("experienceBar").Find("bar").GetComponent<Image>(); ;
@@ -27,11 +27,12 @@ public class LevelWindow : MonoBehaviour
 
     public void SetLevelSystem(LevelSystem levelSystem) {
         // Set the levelsystem object
+
         this.levelSystem = levelSystem;
 
 
         // update the starting values
-        SetLevelNumber(levelSystem.GetLevelNumber());
+        //SetLevelNumber(levelSystem.GetLevelNumber());
         SetExperienceBarSize(levelSystem.GetExperienceNormalized());
 
         // subscribe the events

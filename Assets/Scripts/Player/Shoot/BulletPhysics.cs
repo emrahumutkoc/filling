@@ -4,6 +4,8 @@ using UnityEngine;
 using MRH.Utils;
 
 public class BulletPhysics : MonoBehaviour {
+
+    private float bulletDamage = 27f;
     public void Setup(Vector3 shootDir, float bulletMoveSpeed = 10f) {
         Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
         rigidbody2D.AddForce(shootDir * bulletMoveSpeed, ForceMode2D.Impulse);
@@ -40,5 +42,12 @@ public class BulletPhysics : MonoBehaviour {
 
         //rigidbody2D.velocity = Vector2.zero;
         //rigidbody2D.angularVelocity = 0f;
+    }
+
+    public void SetBulletDamage(float bulletDamage) {
+        this.bulletDamage = bulletDamage;
+    }
+    public float GetBulletDamage() {
+        return bulletDamage;
     }
 }

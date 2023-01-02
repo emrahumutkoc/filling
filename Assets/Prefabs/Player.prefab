@@ -382,6 +382,8 @@ GameObject:
   - component: {fileID: 3318826200464732237}
   - component: {fileID: 3318826200464732236}
   - component: {fileID: 3318826200464732239}
+  - component: {fileID: 1716714625332134548}
+  - component: {fileID: 3162035554000564233}
   - component: {fileID: 3318826200464732240}
   - component: {fileID: 3318826200464732241}
   - component: {fileID: 3318826200464732242}
@@ -446,11 +448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103ab1644bbff9f4ea833a6f3920d891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE_SPEED: 12
-  dashDistance: 3
-  dashLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &3318826200464732239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +463,35 @@ MonoBehaviour:
   pfBullet: {fileID: 1708619524644092478, guid: 9d4bb9b49a0a50f4d86112e4d7aaf09c, type: 3}
   pfBulletPhysics: {fileID: 1708619524644092478, guid: 7835e45a8bb2843a3953206bbf10a1b0, type: 3}
   bulletMoveSpeed: 20
+--- !u!114 &1716714625332134548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318826200464732234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae7b121df64cc346b4c06b8b1fa1e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 12
+--- !u!114 &3162035554000564233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318826200464732234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2714b655cfcf89d4f8a42789e844ef88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashDistance: 3
+  dashLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &3318826200464732240
 MonoBehaviour:
   m_ObjectHideFlags: 0

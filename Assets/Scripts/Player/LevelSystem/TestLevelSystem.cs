@@ -8,7 +8,7 @@ public class TestLevelSystem : MonoBehaviour
     [SerializeField] private Player player;
     private void Awake() {
         LevelSystem levelSystem = new LevelSystem();
-        levelWindow.SetLevelSystem(levelSystem);
-        player.SetLevelSystem(levelSystem);
+        //levelWindow.SetLevelSystem(levelSystem);
+        //player.SetLevelSystem(levelSystem);
     }
 }

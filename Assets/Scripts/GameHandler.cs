@@ -76,15 +76,15 @@ public class GameHandler : MonoBehaviour
 
     private void HandleChangeCellSprite() {
         if (Input.GetKeyDown(KeyCode.G)) {
-            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.None;
-        }
-        if (Input.GetKeyDown(KeyCode.Y)) {
             tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Ground;
         }
-        if (Input.GetKeyDown(KeyCode.U)) {
+        if (Input.GetKeyDown(KeyCode.N)) {
+            tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.None;
+        }
+        if (Input.GetKeyDown(KeyCode.P)) {
             tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Path;
         }
-        if (Input.GetKeyDown(KeyCode.H)) {
+        if (Input.GetKeyDown(KeyCode.T)) {
             tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Dirt;
         }
     }
