@@ -32,4 +32,8 @@ public class PathNode {
         this.isWalkable = isWalkable;
         grid.TriggerGridObjectChanged(x, y);
     }
+
+    public Vector3 GetWorldVector(Vector3 worldOrigin, float nodeSize) {
+        return worldOrigin + new Vector3(x * nodeSize, y * nodeSize);
+    }
 }

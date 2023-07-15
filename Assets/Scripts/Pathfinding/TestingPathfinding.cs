@@ -6,9 +6,14 @@ using MRH.Utils;
 public class TestingPathfinding : MonoBehaviour {
     private Pathfinding pathfinding;
     [SerializeField] private PathfindingVisual pathfindingVisual;
+    private float zoom = 5f;
+
     private void Start() {
         pathfinding = new Pathfinding(10, 10);
-        pathfindingVisual.SetGrid(pathfinding.GetGrid());
+        Vector3 startPoint = Vector3.zero;
+
+        if (pathfindingVisual != null)
+            pathfindingVisual.SetGrid(pathfinding.GetGrid());
     }
 
     private void Update() {

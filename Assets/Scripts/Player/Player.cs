@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+
+    public static Player Instance { get; private set; }
+
     private PlayerBase playerBase;
     private LevelSystem levelSystem;
+    public Player () {
+        Instance = this;
+    }
 
     private void Awake() {
         playerBase = gameObject.GetComponent<PlayerBase>();
@@ -22,4 +28,9 @@ public class Player : MonoBehaviour {
         // do whenever player level ups
         Debug.Log("player level up");
     }
+
+    public Vector3 GetPosition() {
+        return transform.position;
+    }
+
 }

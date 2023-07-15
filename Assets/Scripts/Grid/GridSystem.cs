@@ -101,4 +101,8 @@ public class GridSystem<TGridObject> {
         GetXY(worldPosition, out x, out y);
         return GetGridObject(x, y);
     }
+
+    public bool IsInGrid(int x, int y) {
+        return x >= 0 && y >= 0 && x < width && y < height;
+    }
 }

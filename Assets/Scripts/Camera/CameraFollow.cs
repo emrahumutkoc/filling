@@ -7,6 +7,8 @@ public class CameraFollow : MonoBehaviour {
     private Camera myCamera;
     private Func<Vector3> GetCameraFollowPositionFunc;
     private Func<float> GetCameraZoomFunc;
+    private static float MIN_ZOOM_DISTANCE = 3;
+    private static float MAX_ZOOM_DISTANCE = 15;
 
 
     public void Setup(Func<Vector3> GetCameraFollowPositionFunc, Func<float> GetCameraZoomFunc) {
@@ -60,17 +62,20 @@ public class CameraFollow : MonoBehaviour {
         float cameraZoom = GetCameraZoomFunc();
         float cameraZoomSpeed = 1f;
         float cameraZoomDifference = cameraZoom - myCamera.orthographicSize;
-        myCamera.orthographicSize += cameraZoomDifference * cameraZoomSpeed * Time.deltaTime;
+        float zoomAmount = cameraZoomDifference * cameraZoomSpeed * Time.deltaTime;
+        if (myCamera.orthographicSize + zoomAmount >= MIN_ZOOM_DISTANCE && myCamera.orthographicSize + zoomAmount <= MAX_ZOOM_DISTANCE) {
+            myCamera.orthographicSize += zoomAmount;
 
-        // zooming out
-        if (cameraZoomDifference > 0) {
-            if (myCamera.orthographicSize > cameraZoom) {
-                myCamera.orthographicSize = cameraZoom;
-            }
-        } else {
-            // underzoom
-            if (myCamera.orthographicSize < cameraZoom) {
-                myCamera.orthographicSize = cameraZoom;
+            // zooming out
+            if (cameraZoomDifference > 0) {
+                if (myCamera.orthographicSize > cameraZoom) {
+                    myCamera.orthographicSize = cameraZoom;
+                }
+            } else {
+                // underzoom
+                if (myCamera.orthographicSize < cameraZoom) {
+                    myCamera.orthographicSize = cameraZoom;
+                }
             }
         }
     }

@@ -13,7 +13,6 @@ public class GameHandler : MonoBehaviour
     public Transform obstacle3;
     private float zoom = 5f;
 
-    private GridTEST<CellObject> grid;
     private GridSpriteSystem<GridCellSprite> spriteGrid;
     private TilemapGrid tilemap;
     private TilemapGrid.TilemapObject.TileMapSprite tilemapSprite = TilemapGrid.TilemapObject.TileMapSprite.Ground;
@@ -23,16 +22,18 @@ public class GameHandler : MonoBehaviour
     {
         //grid = new GridTEST<CellObject>(40, 40, 1f, Vector3.zero, (GridTEST<CellObject> g, int x, int y) => new CellObject(g, x, y));
         //spriteGrid = new GridSpriteSystem<GridCellSprite>(40, 40, 1f, Vector3.zero, (GridSpriteSystem<GridCellSprite> g, int x, int y) => new GridCellSprite(g, x, y));
-        tilemap = new TilemapGrid(1, 1, 1f, Vector3.zero);
+        
+        // tilmap-1
+        // tilemap = new TilemapGrid(40, 40, 10f, Vector3.zero);
         cameraFollow.Setup(() => playerTransform.position, () => zoom);
-        tilemap.SetTilemapVisual(tilemapVisual);
+        // tilemap.SetTilemapVisual(tilemapVisual);
         // cameraFollow.SetCameraFollowPosition(new Vector3(100f, 100f));
 
     }
     void Update() {
         HandleZoom();
         //HandleCameraChange();
-        //HandleChangeCellSprite();
+        HandleChangeCellSprite();
         if (Input.GetMouseButtonDown(0)) {
             Vector3 position = Utils.GetMouseWorldPosition();
 
@@ -45,7 +46,7 @@ public class GameHandler : MonoBehaviour
             //if (cellObject != null) {
             //    cellObject.ChangeCellSprite();
             //}
-            tilemap.SetTilemapSprite(position, tilemapSprite);
+            // tilemap.SetTilemapSprite(position, tilemapSprite);
 
             //if (cellObject != null) {
             //    cellObject.ChangeCellSprite();

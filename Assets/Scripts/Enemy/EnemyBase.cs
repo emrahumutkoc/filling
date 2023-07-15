@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour {
-    private float health = 100f;
-    public float speed = 3f;
-    private Transform target;
 
+    // Enemy Base Prop
+    [SerializeField] private float damage = 20f;
+    [SerializeField] private float health = 100f;
+    [SerializeField] private float speed = 3f;
+
+    private Transform target;
     private void Update() {
         if (target != null) {
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collider) {
         //Player player = collider.GetComponent<Player>();
@@ -52,7 +54,7 @@ public class EnemyBase : MonoBehaviour {
     }
 
     public void EnemyDie() {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void MoveToDirection() {
