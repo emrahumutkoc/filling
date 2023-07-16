@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour {
     private Func<Vector3> GetCameraFollowPositionFunc;
     private Func<float> GetCameraZoomFunc;
     private static float MIN_ZOOM_DISTANCE = 3;
-    private static float MAX_ZOOM_DISTANCE = 15;
+    private static float MAX_ZOOM_DISTANCE = 45;
 
 
     public void Setup(Func<Vector3> GetCameraFollowPositionFunc, Func<float> GetCameraZoomFunc) {

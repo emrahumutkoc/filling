@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 4732126788441414683}
   - component: {fileID: 4163060175685816815}
   - component: {fileID: 2296961638873297639}
-  - component: {fileID: 6090939214486416908}
+  - component: {fileID: 210100734}
+  - component: {fileID: 210100736}
+  - component: {fileID: 210100737}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -137,7 +139,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6090939214486416908
+--- !u!114 &210100734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,9 +148,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 8539947680906066231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6ef74f300595d346a2a1f06f4a529ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 84ad01b70b5b3ec4c9885c327b0581c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
   health: 100
   speed: 3
+--- !u!114 &210100736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539947680906066231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d179d1f720d57240bc6dfc1688a0622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &210100737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539947680906066231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce6e4c277485f5429fae3645ddb0dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

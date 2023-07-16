@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class EnemyMain : MonoBehaviour {
 
+    [SerializeField] private float damage = 20f;
+    [SerializeField] private float health = 100f;
+    [SerializeField] private float speed = 3f;
+
+    // To lock rotation - DELETE
+    private Quaternion lockedRotation;
+
     public event EventHandler OnDestroySelf;
     public event EventHandler<OnDamagedEventArgs> OnDamaged;
     public class OnDamagedEventArgs {
@@ -36,6 +43,14 @@ public class EnemyMain : MonoBehaviour {
         // HealthSystem = new HealthSystem(100);
     }
 
+    private void Start() {
+        lockedRotation = transform.rotation;
+    }
+
+    private void Update() {
+        // transform.rotation = lockedRotation;
+    }
+
     public Vector3 GetPosition() {
         return transform.position;
     }
@@ -49,6 +64,29 @@ public class EnemyMain : MonoBehaviour {
             attacker = attacker,
             damageMultiplier = damageMultiplier,
         });
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider) {
+        //Player player = collider.GetComponent<Player>();
+
+        if (collider.TryGetComponent<BulletPhysics>(out BulletPhysics bullet)) {
+            bullet.DestroyBullet();
+            TakeDamage(bullet.GetBulletDamage());
+        }
+    }
+
+    public void TakeDamage(float damage) {
+        if (health > 0) {
+            health -= damage;
+        }
+
+        if (health == 0 || health < 0) {
+            EnemyDie();
+        }
+    }
+
+    public void EnemyDie() {
+        gameObject.SetActive(false);
     }
 
 }

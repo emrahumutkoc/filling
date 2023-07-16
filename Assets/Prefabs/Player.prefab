@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfBullet: {fileID: 1708619524644092478, guid: 9d4bb9b49a0a50f4d86112e4d7aaf09c, type: 3}
   pfBulletPhysics: {fileID: 1708619524644092478, guid: 7835e45a8bb2843a3953206bbf10a1b0, type: 3}
-  bulletMoveSpeed: 20
+  bulletMoveSpeed: 30
 --- !u!114 &1716714625332134548
 MonoBehaviour:
   m_ObjectHideFlags: 0
